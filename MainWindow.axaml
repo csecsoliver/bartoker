@@ -2,8 +2,38 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="400"
         x:Class="Bartoker.MainWindow"
         Title="Bartoker">
-    Welcome to Avalonia!
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MinWidth="330" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Content="Input url from network tab:" VerticalAlignment="Center" Margin="5"/>
+        <TextBox Grid.Row="1" Grid.Column="0" Name="TbUrl" Margin="5"/>
+        <Grid Grid.Row="2" Grid.Column="0" ColumnDefinitions="250,*" Margin="5">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Convert to mp3 if needed: " VerticalAlignment="Center"/>
+                <CheckBox Name="CbMp3"/>
+            </StackPanel>
+            <Button Grid.Column="1" Content="Go" Width="70" HorizontalAlignment="Right"/>
+        </Grid>
+        <DataGrid Grid.Row="3" Grid.Column="0" Name="DgDownloads" x:CompileBindings="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Start" Binding="{Binding Meta.Start}" />
+                <DataGridTextColumn Header="End" Binding="{Binding Meta.End}" />
+                <DataGridTextColumn Header="Format" Binding="{Binding Meta.Format}" />
+                <DataGridTextColumn Header="Status" Binding="{Binding StatusText}" />
+                <DataGridTextColumn Header="Progress" Binding="{Binding ProgressText}" />
+                <DataGridTextColumn Header="Speed" Binding="{Binding SpeedText}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
 </Window>
