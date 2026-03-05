@@ -8,8 +8,11 @@ namespace Bartoker;
 
 public class DownloadItem
 {
+    public int Id { get; set; }
     public AudioMeta Meta { get; set; }
-
+    public string Status { get; set; }
+    public double Progress { get; set; }
+    public double Speed { get; set; }
     public string StatusText
     {
         get
@@ -35,11 +38,16 @@ public class DownloadItem
     }
 
     public bool ToConvert { get; set; }
+    public bool Finished { get; set; } = false;
 
+    public DownloadItem()
+    {
+        
+    }
     public DownloadItem(string url, bool convert, string path)
     {
-        Meta = new AudioMeta();
         var parsedUrl = new Uri(url);
+        this.Meta = new AudioMeta();
         var provider = System.Globalization.CultureInfo.InvariantCulture;
         if (url.Contains("mr3.mp3"))
         {
@@ -52,6 +60,7 @@ public class DownloadItem
             {
                 throw new ArgumentException($"tried parsing as mp3 url, failed at path segments: {url}");
             }
+            
 
             Meta.Start = startDate;
             Meta.End = endDate;
