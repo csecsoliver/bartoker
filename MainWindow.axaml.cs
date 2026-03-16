@@ -10,12 +10,15 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        DgDownloads.ItemsSource = DownloadManager.Downloads;
+        
+        DgDownloads.ItemsSource = DownloadManager.Instance.Items;
+        
     }
 
     private void BtnSettings_OnClick(object? sender, RoutedEventArgs e)
     {
         throw new System.NotImplementedException();
+        
     }
 
     private async void BtnAdd_OnClick(object? sender, RoutedEventArgs e)
@@ -24,7 +27,7 @@ public partial class MainWindow : Window
         {
             var url = new Uri(TbUrl.Text!);
             
-            DownloadManager.AddDownload(TbUrl.Text!, CbMp3.IsChecked!.Value);
+            DownloadManager.Instance.AddDownload(TbUrl.Text!, CbMp3.IsChecked!.Value);
         }
         catch (Exception error)
         {

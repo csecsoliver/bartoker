@@ -5,7 +5,9 @@ namespace Bartoker;
 
 public class BartokerContext : DbContext
 {
+    public static BartokerContext Instance { get; } = new BartokerContext();
     public DbSet<DownloadItem> Downloads { get; set; }
+    
     public DbSet<Setting> Settings { get; set; }
     private string DbPath { get; }
 
