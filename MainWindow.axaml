@@ -7,8 +7,8 @@
         Title="Bartoker">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" MinWidth="330" />
-            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" MinWidth="330" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
@@ -28,7 +28,7 @@
             
         </Grid>
         <Button Grid.Column="0" Grid.Row="3" Content="Settings" Name="BtnSettings" Click="BtnSettings_OnClick"/>
-        <DataGrid Grid.Row="4" Grid.Column="0" Name="DgDownloads" x:CompileBindings="False">
+        <DataGrid Grid.Row="4" Grid.Column="0" Name="DgDownloads" x:CompileBindings="False" DoubleTapped="DgDownloads_OnDoubleTapped" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Start" Binding="{Binding Meta.Start}" />
                 <DataGridTextColumn Header="End" Binding="{Binding Meta.End}" />
@@ -36,6 +36,7 @@
                 <DataGridTextColumn Header="Status" Binding="{Binding StatusText}" />
                 <DataGridTextColumn Header="Progress" Binding="{Binding ProgressText}" />
                 <DataGridTextColumn Header="Speed" Binding="{Binding SpeedText}" />
+                <DataGridTextColumn Header="Errors" Binding="{Binding Error}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

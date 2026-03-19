@@ -1,5 +1,6 @@
 using System;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using MsBox.Avalonia;
 
@@ -11,7 +12,8 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         
-        DgDownloads.ItemsSource = DownloadManager.Instance.Items;
+        DgDownloads.ItemsSource = DownloadManager.Instance.ObservableDownloads;
+        
         
     }
 
@@ -31,8 +33,21 @@ public partial class MainWindow : Window
         }
         catch (Exception error)
         {
-            await MessageBoxManager.GetMessageBoxStandard("Error", error.Message ).ShowAsync();
+            await MessageBoxManager.GetMessageBoxStandard("Error", error.Message).ShowAsPopupAsync(this);
         }
         
+    }
+
+    private async void DgDownloads_OnDoubleTapped(object? sender, TappedEventArgs e)
+    {
+        if(e.Source is not Border source || sender is not DataGrid datagrid) return;
+        switch (source.Name)
+        {
+            case "CellBorder":
+                await MessageBoxManager.GetMessageBoxStandard("asd", "asd" ).ShowAsPopupAsync(this);
+                break;
+            case "HeaderBackground":
+                return;
+        }
     }
 }
